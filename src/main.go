@@ -3,7 +3,10 @@ package main
 import (
     "log"
     "net/http"
+    "os"
 	"strings"
+
+    _ "github.com/joho/godotenv/autoload"
 )
 
 type securedFileSystem struct {
@@ -28,9 +31,13 @@ func (sfs securedFileSystem) Open(path string) (http.File, error) {
 }
 
 func main() {
-    fs := http.FileServer(securedFileSystem{http.Dir("./static")})
-    http.Handle("/static/", http.StripPrefix("/static/", fs))
-    err := http.ListenAndServe(":9090", nil)
+    port := os.Getenv("PORT")
+    docs_path := os.Getenv("DOCS_PATH")
+    log.Println("port:", port)
+    log.Println("docs_path:", docs_path)
+    fs := http.FileServer(securedFileSystem{http.Dir(docs_path)})
+    http.Handle("/", http.StripPrefix("/", fs))
+    err := http.ListenAndServe(":"+port, nil)
     if err != nil {
         log.Fatal("ListenAndServe: ", err)
     }
