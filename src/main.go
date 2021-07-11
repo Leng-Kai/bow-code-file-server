@@ -22,8 +22,8 @@ func main() {
     fs := http.FileServer(download.SecuredFileSystem{http.Dir(docs_path)})
     http.Handle("/files/", http.StripPrefix("/files", fs))
 
-    http.HandleFunc("/upload/course/{id}/block", upload.CreateBlockHandler)
-    http.HandleFunc("/upload/course/{id}/block/{bid}", upload.UpdateBlockHandler)
+    // http.HandleFunc("/upload/course/{id}/block", upload.CreateBlockHandler)
+    // http.HandleFunc("/upload/course/{id}/block/{bid}", upload.UpdateBlockHandler)
 
     err := http.ListenAndServe(":"+port, nil)
     if err != nil {
