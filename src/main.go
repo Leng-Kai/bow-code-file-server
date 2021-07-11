@@ -6,7 +6,7 @@ import (
     "os"
 
     "github.com/Leng-Kai/bow-code-file-server/pkg/download"
-    "github.com/Leng-Kai/bow-code-file-server/pkg/upload"
+    // "github.com/Leng-Kai/bow-code-file-server/pkg/upload"
 
     _ "github.com/joho/godotenv/autoload"
 )
