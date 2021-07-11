@@ -9,6 +9,7 @@ import (
     // "github.com/Leng-Kai/bow-code-file-server/pkg/upload"
 
     _ "github.com/joho/godotenv/autoload"
+    // "github.com/rs/cors"
 )
 
 var port string
@@ -20,7 +21,8 @@ func main() {
     log.Println("port:", port)
     log.Println("docs_path:", docs_path)
     fs := http.FileServer(download.SecuredFileSystem{http.Dir(docs_path)})
-    http.Handle("/files/", http.StripPrefix("/files", fs))
+    // http.Handle("/files/", http.StripPrefix("/files", fs))
+    http.HandleFunc("/files/", download.Handler2HandlerFunc(http.StripPrefix("/files", fs)))
 
     // http.HandleFunc("/upload/course/{id}/block", upload.CreateBlockHandler)
     // http.HandleFunc("/upload/course/{id}/block/{bid}", upload.UpdateBlockHandler)
