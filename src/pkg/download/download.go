@@ -1,6 +1,7 @@
 package download
 
 import (
+    "log"
     "net/http"
     "strings"
 )
@@ -28,6 +29,14 @@ func (sfs SecuredFileSystem) Open(path string) (http.File, error) {
 
 func Handler2HandlerFunc(handler http.Handler) http.HandlerFunc {
     return func(w http.ResponseWriter, r *http.Request) {
+
+        log.Println(r)
+
+        w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
+        w.Header().Set("Access-Control-Allow-Headers","Content-Type,access-control-allow-origin, access-control-allow-headers")
+        w.Header().Set("Access-Control-Allow-Methods", "POST, GET")
+        w.Header().Set("Access-Control-Allow-Credentials", "true")
+
         handler.ServeHTTP(w, r)
     }
 }
