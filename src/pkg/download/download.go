@@ -33,6 +33,7 @@ func Handler2HandlerFunc(handler http.Handler) http.HandlerFunc {
         log.Println(r)
 
         w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
+        w.Header().Set("Access-Control-Allow-Origin", "http://api.ramen-live.com:3000")
         w.Header().Set("Access-Control-Allow-Headers","Content-Type,access-control-allow-origin, access-control-allow-headers")
         w.Header().Set("Access-Control-Allow-Methods", "POST, GET")
         w.Header().Set("Access-Control-Allow-Credentials", "true")
